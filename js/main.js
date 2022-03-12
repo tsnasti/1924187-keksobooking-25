@@ -5,3 +5,5 @@ window.console.log(
 );
 
 import './card.js';
+
+import './form-status.js';
