@@ -3,6 +3,8 @@ const roomNumber = form.querySelector('[name="rooms"]');
 const capacityNumber = form.querySelector('[name="capacity"]');
 const houseroomTypes = form.querySelector('[name="type"]');
 const price = form.querySelector('[name="price"]');
+const timeCheckin = form.querySelector('[name="timein"]');
+const timeCheckout = form.querySelector('[name="timeout"]');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -44,6 +46,18 @@ function minPriceValidation () {
 }
 
 pristine.addValidator(price, minPriceValidation, ErrorMessagePrice);
+
+function onSelectTimeIn (evt) {
+  timeCheckin.value = evt.target.value;
+}
+
+function onSelectTimeOut (evt) {
+  timeCheckout.value = evt.target.value;
+}
+
+timeCheckin.addEventListener('change', onSelectTimeOut);
+timeCheckout.addEventListener('change', onSelectTimeIn);
+
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
