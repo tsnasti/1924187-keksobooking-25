@@ -1,8 +1,3 @@
-import {createSimilarAdvertisement} from './data.js';
-
-const displayAdvertisement = document.querySelector('.map');
-const similarAdvertisementList = displayAdvertisement.querySelector('.map__canvas');
-
 const similarAdvertisementTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const houseroomTranslate = {
@@ -60,12 +55,4 @@ const getAdvertisement = ({offer, author}) => {
   return advertisementElement;
 };
 
-const appendSimilarAdvertisement = (similarAdvertisements) => {
-  similarAdvertisements.forEach(({offer, author}) => {
-    similarAdvertisementList.appendChild(getAdvertisement({offer, author}));
-  });
-};
-
-appendSimilarAdvertisement(createSimilarAdvertisement());
-
-export {appendSimilarAdvertisement};
+export {getAdvertisement};
