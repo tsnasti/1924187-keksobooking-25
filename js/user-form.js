@@ -5,6 +5,7 @@ const houseroomTypes = form.querySelector('[name="type"]');
 const price = form.querySelector('[name="price"]');
 const timeCheckin = form.querySelector('[name="timein"]');
 const timeCheckout = form.querySelector('[name="timeout"]');
+const resetButton = document.querySelector('[type="reset"]');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -58,13 +59,14 @@ function onSelectTimeOut (evt) {
 timeCheckin.addEventListener('change', onSelectTimeOut);
 timeCheckout.addEventListener('change', onSelectTimeIn);
 
-
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
-    window.console.log('Можно отправлять');
-  } else {
-    window.console.log('Форма невалидна');
+    form.reset();
   }
+});
+
+resetButton.addEventListener('click', () => {
+  form.reset();
 });
