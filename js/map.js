@@ -1,6 +1,5 @@
 import {addActiveStatus} from './form-status.js';
 import {getAdvertisement} from './card.js';
-import {createSimilarAdvertisement} from './data.js';
 
 const CENTER_COORDINATES = {
   lat: 35.68173,
@@ -13,10 +12,6 @@ address.readOnly = true;
 
 address.value = `${CENTER_COORDINATES.lat}, ${CENTER_COORDINATES.lng}`;
 
-const resetButton = document.querySelector('[type="reset"]');
-
-const similarCards = createSimilarAdvertisement();
-
 const map = L.map('map-canvas')
   .on('load', () => {
     addActiveStatus();
@@ -24,7 +19,7 @@ const map = L.map('map-canvas')
   .setView({
     lat: CENTER_COORDINATES.lat,
     lng: CENTER_COORDINATES.lng,
-  }, 10);
+  }, 12);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -56,8 +51,7 @@ mainPinMarker.on('moveend', (evt) => {
 
 mainPinMarker.addTo(map);
 
-resetButton.addEventListener('click', (evt) => {
-  evt.preventDefault();
+const resetMap = () => {
   address.value = `${CENTER_COORDINATES.lat}, ${CENTER_COORDINATES.lng}`;
   mainPinMarker.setLatLng({
     lat: CENTER_COORDINATES.lat,
@@ -67,8 +61,10 @@ resetButton.addEventListener('click', (evt) => {
   map.setView({
     lat: CENTER_COORDINATES.lat,
     lng: CENTER_COORDINATES.lng,
-  }, 10);
-});
+  }, 12);
+};
+
+export{resetMap};
 
 const usualMarkerIcon = L.icon({
   iconUrl: './img/pin.svg',
@@ -94,6 +90,10 @@ const createUsualMarker = ({offer, author, location}) => {
     .bindPopup(getAdvertisement({offer, author}));
 };
 
-similarCards.forEach((card) => {
-  createUsualMarker(card);
-});
+const renderCards = (similarCards) => {
+  similarCards.forEach((card) => {
+    createUsualMarker(card);
+  });
+};
+
+export{renderCards};
