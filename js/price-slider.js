@@ -3,10 +3,10 @@ const priceInput = document.querySelector('#price');
 
 noUiSlider.create(sliderPrice, {
   range: {
-    min: 0,
+    min: Number(priceInput.min),
     max: Number(priceInput.max),
   },
-  start: 0,
+  start: Number(priceInput.placeholder),
   step: 1,
   connect: 'lower',
   format: {
@@ -26,3 +26,9 @@ sliderPrice.noUiSlider.on('update', () => {
 priceInput.addEventListener('change',() => {
   sliderPrice.noUiSlider.set(priceInput.value);
 });
+
+const resetSlider = () => {
+  sliderPrice.noUiSlider.reset();
+};
+
+export {resetSlider};

@@ -41,7 +41,13 @@ const getAdvertisement = ({offer, author}) => {
   advertisementElement.querySelector('.popup__type').textContent = houseroomTranslate[offer.type];
   advertisementElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   advertisementElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-  addFeatures(advertisementElement.querySelector('.popup__features'), offer.features);
+
+  const popupFeatures = advertisementElement.querySelector('.popup__features');
+  if (offer.features) {
+    addFeatures(popupFeatures, offer.features);
+  } else {
+    popupFeatures.classList.add('hidden');
+  }
 
   const popupDescription = advertisementElement.querySelector('.popup__description');
   if (offer.description) {
@@ -50,7 +56,13 @@ const getAdvertisement = ({offer, author}) => {
     popupDescription.classList.add('hidden');
   }
 
-  addPhotos(advertisementElement.querySelector('.popup__photos'), offer.photos);
+  const popupPhotos = advertisementElement.querySelector('.popup__photos');
+  if (offer.photos) {
+    addPhotos(popupPhotos, offer.photos);
+  } else {
+    popupPhotos.classList.add('hidden');
+  }
+
   advertisementElement.querySelector('.popup__avatar').src = author.avatar;
   return advertisementElement;
 };
