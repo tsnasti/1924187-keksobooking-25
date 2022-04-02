@@ -12,6 +12,7 @@ const timeCheckin = form.querySelector('[name="timein"]');
 const timeCheckout = form.querySelector('[name="timeout"]');
 const resetButton = document.querySelector('[type="reset"]');
 const submitButton = document.querySelector('[type="submit"]');
+const mapFiltersForm = document.querySelector('.map__filters');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -88,6 +89,7 @@ form.addEventListener('submit', (evt) => {
         showMessage('success');
         unblockSubmitButton();
         resetSlider();
+        mapFiltersForm.reset();
       },
       () => {
         showMessage('error');
@@ -98,11 +100,11 @@ form.addEventListener('submit', (evt) => {
   }
 });
 
-
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
   form.reset();
+  mapFiltersForm.reset();
   resetMap();
   resetSlider();
 });

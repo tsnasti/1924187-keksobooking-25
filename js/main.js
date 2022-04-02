@@ -10,12 +10,24 @@ import './price-slider.js';
 
 import {getData} from './api.js';
 
+import {changeevent, resetFiltres} from './map-filter.js';
+
+import {debounce} from './util.js';
+
 addDisabledStatus();
 
 addActiveStatus();
 
-const SIMILAR_ADVERTISEMENT_COUNT = 10;
+const RERENDER_DELAY = 500;
 
 getData((cards) => {
-  renderCards(cards.slice(0, SIMILAR_ADVERTISEMENT_COUNT));
+  renderCards(cards);
+  changeevent(debounce(
+    () => renderCards(cards),
+    RERENDER_DELAY,
+  ));
+  resetFiltres(debounce(
+    () => renderCards(cards),
+    RERENDER_DELAY,
+  ));
 });

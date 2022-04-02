@@ -1,5 +1,6 @@
 import {addActiveStatus} from './form-status.js';
 import {getAdvertisement} from './card.js';
+import {housingFiltration, compareFeatures} from './map-filter.js';
 
 const CENTER_COORDINATES = {
   lat: 35.68173,
@@ -62,6 +63,7 @@ const resetMap = () => {
     lat: CENTER_COORDINATES.lat,
     lng: CENTER_COORDINATES.lng,
   }, 12);
+  map.closePopup();
 };
 
 export{resetMap};
@@ -90,10 +92,20 @@ const createUsualMarker = ({offer, author, location}) => {
     .bindPopup(getAdvertisement({offer, author}));
 };
 
+const SIMILAR_ADVERTISEMENT_COUNT = 10;
+
 const renderCards = (similarCards) => {
-  similarCards.forEach((card) => {
+  similarMarkerGroup.clearLayers();
+  similarCards.slice().filter(housingFiltration).slice(0, SIMILAR_ADVERTISEMENT_COUNT).sort(compareFeatures).forEach((card) => {
     createUsualMarker(card);
   });
 };
 
 export{renderCards};
+
+const resetUsualMarkers = () => {
+  similarMarkerGroup.clearLayers();
+  createUsualMarker();
+};
+
+export{resetUsualMarkers};

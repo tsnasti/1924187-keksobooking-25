@@ -51,9 +51,21 @@ const showMessage = (messageType) => {
   });
 
   const closeButton = typeMessageTamplate.querySelector(`.${messageType}__button`);
-  closeButton.addEventListener('click', () => {
-    massage.classList.add('hidden');
-  });
+  if (closeButton) {
+    closeButton.addEventListener('click', () => {
+      massage.classList.add('hidden');
+    });
+  }
 };
 
 export {showMessage};
+
+function debounce (callback, timeoutDelay) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {debounce};
