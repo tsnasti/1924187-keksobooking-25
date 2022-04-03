@@ -1,5 +1,5 @@
 import {resetMap} from './map.js';
-import {showMessage} from './util.js';
+import {showMessage} from './message.js';
 import {resetSlider} from './price-slider.js';
 import {sendData} from './api.js';
 
@@ -12,6 +12,7 @@ const timeCheckin = form.querySelector('[name="timein"]');
 const timeCheckout = form.querySelector('[name="timeout"]');
 const resetButton = document.querySelector('[type="reset"]');
 const submitButton = document.querySelector('[type="submit"]');
+const mapFiltersForm = document.querySelector('.map__filters');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -88,6 +89,7 @@ form.addEventListener('submit', (evt) => {
         showMessage('success');
         unblockSubmitButton();
         resetSlider();
+        mapFiltersForm.reset();
       },
       () => {
         showMessage('error');
@@ -98,11 +100,11 @@ form.addEventListener('submit', (evt) => {
   }
 });
 
-
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
   form.reset();
+  mapFiltersForm.reset();
   resetMap();
   resetSlider();
 });

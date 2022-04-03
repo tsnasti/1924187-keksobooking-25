@@ -18,42 +18,12 @@ const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.le
 
 export {getRandomInt, getRandomFloat, getRandomArrayElement};
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
+function debounce (callback, timeoutDelay) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
 
-export {isEscapeKey};
-
-const ALERT_SHOW_TIME = 5000;
-
-const showAlert = (message) => {
-  const alertContainer = document.createElement('div', { is : 'show-alert' });
-  alertContainer.textContent = message;
-  document.body.append(alertContainer);
-
-  setTimeout(() => {
-    alertContainer.remove();
-  }, ALERT_SHOW_TIME);
-};
-
-export {showAlert};
-
-const showMessage = (messageType) => {
-  const typeMessageTamplate = document.querySelector(`#${messageType}`).content.querySelector(`.${messageType}`);
-  const massage = typeMessageTamplate.cloneNode(true);
-  document.querySelector('.notice').append(massage);
-  document.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      massage.classList.add('hidden');
-    }
-  });
-  document.addEventListener('click', () => {
-    massage.classList.add('hidden');
-  });
-
-  const closeButton = typeMessageTamplate.querySelector(`.${messageType}__button`);
-  closeButton.addEventListener('click', () => {
-    massage.classList.add('hidden');
-  });
-};
-
-export {showMessage};
+export {debounce};
