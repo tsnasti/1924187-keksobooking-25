@@ -2,6 +2,7 @@ import {resetMap} from './map.js';
 import {showMessage} from './message.js';
 import {resetSlider} from './price-slider.js';
 import {sendData} from './api.js';
+import {removeFile, avatarPreview, housingPreview} from './avatar.js';
 
 const form = document.querySelector('.ad-form');
 const roomNumber = form.querySelector('[name="rooms"]');
@@ -90,6 +91,7 @@ form.addEventListener('submit', (evt) => {
         unblockSubmitButton();
         resetSlider();
         mapFiltersForm.reset();
+        removeFile(avatarPreview, housingPreview);
       },
       () => {
         showMessage('error');
@@ -107,4 +109,5 @@ resetButton.addEventListener('click', (evt) => {
   mapFiltersForm.reset();
   resetMap();
   resetSlider();
+  removeFile(avatarPreview, housingPreview);
 });
