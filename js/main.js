@@ -14,6 +14,8 @@ import {changeEvent, resetFiltres} from './map-filter.js';
 
 import {debounce} from './util.js';
 
+import  './avatar.js';
+
 addDisabledStatus();
 
 addActiveStatus();
