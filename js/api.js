@@ -1,4 +1,5 @@
 import {showAlert} from './message.js';
+import {addDisabledOnFilter} from './form-status.js';
 
 const GET_DATA_ADDRESS = 'https://25.javascript.pages.academy/keksobooking/data';
 const SEND_DATA_ADDRESS = 'https://25.javascript.pages.academy/keksobooking';
@@ -11,6 +12,7 @@ const getData = (onSuccess) => {
     })
     .catch(() => {
       showAlert('Не удалось загрузить данные. Перезагрузите страницу');
+      addDisabledOnFilter();
     });
 };
 

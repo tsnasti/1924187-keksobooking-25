@@ -2,7 +2,7 @@ import {resetMap} from './map.js';
 import {showMessage} from './message.js';
 import {resetSlider} from './price-slider.js';
 import {sendData} from './api.js';
-import {removeFile, avatarPreview, housingPreview} from './avatar.js';
+import {removeFile, avatarPreview, housingPreview} from './photo-files.js';
 
 const form = document.querySelector('.ad-form');
 const roomNumber = form.querySelector('[name="rooms"]');
@@ -14,6 +14,8 @@ const timeCheckout = form.querySelector('[name="timeout"]');
 const resetButton = document.querySelector('[type="reset"]');
 const submitButton = document.querySelector('[type="submit"]');
 const mapFiltersForm = document.querySelector('.map__filters');
+
+export {form, mapFiltersForm};
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -36,24 +38,20 @@ const houseroomMinPrice = {
   'palace': 10000
 };
 
-function capacityValidation () {
-  return roomForCapacity[roomNumber.value].includes(capacityNumber.value);
-}
+const capacityValidation = () => roomForCapacity[roomNumber.value].includes(capacityNumber.value);
 
 pristine.addValidator(capacityNumber, capacityValidation, 'Колличество гостей не может превышать количество комнат');
 
-function setMinPriceAttr () {
+const setMinPriceAttr = () => {
   price.min = houseroomMinPrice[houseroomTypes.value];
   price.placeholder = houseroomMinPrice[houseroomTypes.value];
-}
+};
 
 houseroomTypes.addEventListener('change', setMinPriceAttr);
 
 const ErrorMessagePrice = () => `Минимальная цена ${price.min}`;
 
-function minPriceValidation () {
-  return Number(price.value) >= Number(price.min);
-}
+const minPriceValidation = () => Number(price.value) >= Number(price.min);
 
 pristine.addValidator(price, minPriceValidation, ErrorMessagePrice);
 

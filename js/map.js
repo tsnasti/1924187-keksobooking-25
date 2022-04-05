@@ -13,21 +13,26 @@ address.readOnly = true;
 
 address.value = `${CENTER_COORDINATES.lat}, ${CENTER_COORDINATES.lng}`;
 
-const map = L.map('map-canvas')
-  .on('load', () => {
+const map = L.map('map-canvas');
+
+const renderMap = () => {
+  map.on('load', () => {
     addActiveStatus();
-  })
-  .setView({
+  });
+  map.setView({
     lat: CENTER_COORDINATES.lat,
     lng: CENTER_COORDINATES.lng,
   }, 12);
 
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(map);
+};
+
+export{renderMap};
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
