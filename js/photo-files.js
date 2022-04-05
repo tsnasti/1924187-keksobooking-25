@@ -10,8 +10,6 @@ const housingPreview = document.createElement('img');
 housingPreview.classList.add('ad-form__housing-photo');
 photoContainer.appendChild(housingPreview);
 
-export {avatarPreview, housingPreview};
-
 const uploadFile = (fileChooser, preview) => {
   fileChooser.addEventListener('change', () => {
     const file = fileChooser.files[0];
@@ -31,7 +29,7 @@ uploadFile(housingfileChooser, housingPreview);
 
 const removeFile = (avatarPhoto, housingPhoto) => {
   avatarPhoto.src = DEFAULT_SRC;
-  housingPhoto.remove();
+  housingPhoto.src = '';
 };
 
-export {removeFile};
+export {avatarPreview, housingPreview, removeFile};

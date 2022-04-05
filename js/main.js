@@ -1,10 +1,8 @@
 import {addDisabledStatus} from './form-status.js';
 
-import {addActiveStatus} from './form-status.js';
-
 import './user-form.js';
 
-import {renderCards} from './map.js';
+import {renderMap, renderCards} from './map.js';
 
 import './price-slider.js';
 
@@ -14,11 +12,11 @@ import {changeEvent, resetFiltres} from './map-filter.js';
 
 import {debounce} from './util.js';
 
-import  './avatar.js';
+import  './photo-files.js';
 
 addDisabledStatus();
 
-addActiveStatus();
+renderMap();
 
 const RERENDER_DELAY = 500;
 
