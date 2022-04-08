@@ -1,8 +1,6 @@
 import {form, mapFiltersForm} from './user-form.js';
 
-//const adForm = document.querySelector('.ad-form');
 const adFieldset = form.querySelectorAll('fieldset');
-//const admapFilter = document.querySelector('.map__filters');
 const adFilterElements = mapFiltersForm.querySelectorAll('select, fieldset');
 
 const addDisabledOnFilter = () => {
@@ -20,8 +18,6 @@ const addDisabledStatus = () => {
   addDisabledOnFilter();
 };
 
-export {addDisabledStatus, addDisabledOnFilter};
-
 const addActiveStatus = () => {
   form.classList.remove('ad-form--disabled');
   adFieldset.forEach((fieldset) => {
@@ -33,4 +29,4 @@ const addActiveStatus = () => {
   });
 };
 
-export {addActiveStatus};
+export {addDisabledStatus, addDisabledOnFilter, addActiveStatus};

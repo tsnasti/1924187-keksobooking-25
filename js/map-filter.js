@@ -46,14 +46,9 @@ const housingFiltration = ({offer}) =>
   filterValue(housingGuests, offer.guests) &&
   filterFeatures(offer.features);
 
-export {housingFiltration};
-
 const changeEvent = (cb) => {
   mapFiltersForm.addEventListener('change', cb);
 };
-
-export {changeEvent};
-
 
 const getFeaturesRank = ({offer}) => {
 
@@ -76,10 +71,8 @@ const compareFeatures = (featureA, featureB) => {
   return rankB - rankA;
 };
 
-export {compareFeatures};
-
 const resetFiltres = (cb) => {
   mapFiltersForm.addEventListener('reset', () => setTimeout(cb, 100));
 };
 
-export {resetFiltres};
+export {housingFiltration, changeEvent, compareFeatures, resetFiltres};
